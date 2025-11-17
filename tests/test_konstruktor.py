@@ -3,62 +3,63 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 from tests.conftest import LOGIN_EMAIL, SIGNUP_EMAIL, SIGNUP_NAME, SIGNUP_PSWD
-from tests.locators import HEADER_LK_LINK, HOME_LOGIN_BUTTON, HOME_ORDER_BUTTON, LOGIN_EMAIL_INPUT, LOGIN_LOGIN_BUTTON, LOGIN_RECOVERY_BUTTON, LOGIN_SIGNUP_LINK, RECOVERY__LOGIN_BUTTON, SIGNUP_LOGIN_BUTTON, SIGNUP_NAME_INPUT, SIGNUP_PAROL_ERROR, SIGNUP_PAROL_INPUT, SIGNUP_SIGNUP_BUTTON
+from tests.helper import login
+from tests.locators import HEADER_KONSTR_LINK, HEADER_LK_LINK, HOME_BUN_BUTTON, HOME_BUN_HDR, HOME_FILL_BUTTON, HOME_FILL_HDR, HOME_LOGIN_BUTTON, HOME_ORDER_BUTTON, HOME_SAUSE_BUTTON, HOME_SAUSE_HDR, LK_EXIT_BUTTON, LOGIN_EMAIL_INPUT, LOGIN_LOGIN_BUTTON, LOGIN_RECOVERY_BUTTON, LOGIN_SIGNUP_LINK, RECOVERY__LOGIN_BUTTON, SIGNUP_LOGIN_BUTTON, SIGNUP_NAME_INPUT, SIGNUP_PAROL_ERROR, SIGNUP_PAROL_INPUT, SIGNUP_SIGNUP_BUTTON
 
-class TestKonstruktor:
-    def test_konstruktor_from_lk(self, driver):
-        driver.get('https://stellarburgers.education-services.ru/') 
-        
-        button = driver.find_element(By.XPATH, HOME_LOGIN_BUTTON)
-        button.click()
 
-        email = driver.find_element(By.XPATH, LOGIN_EMAIL_INPUT)
-        email.send_keys(LOGIN_EMAIL) 
+from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
 
-        pswd = driver.find_element(By.XPATH, SIGNUP_PAROL_INPUT)
-        pswd.send_keys(SIGNUP_PSWD) 
-        
-        button = driver.find_element(By.XPATH,LOGIN_LOGIN_BUTTON)
-        button.click()
+class TestKonstr:
+    def test_bun_konst_after_login(self, driver):
+        login(driver)
+
+
+        button = driver.find_element(By.XPATH,HOME_BUN_BUTTON)
+        ActionChains(driver)\
+            .move_to_element(button)\
+            .click()\
+            .perform()
+
 
         sleep(1)
 
-        button = driver.find_element(By.XPATH,HOME_ORDER_BUTTON)
-
-        current_url = driver.current_url
-        assert current_url == 'https://stellarburgers.education-services.ru/'
-        
-
+        h = driver.find_element(By.XPATH,HOME_BUN_HDR)
+        assert h.is_displayed()
         driver.quit()
 
-    def test_login_recovery(self, driver):
-        driver.get('https://stellarburgers.education-services.ru/') 
-        
-        button = driver.find_element(By.XPATH, HOME_LOGIN_BUTTON)
-        button.click()
 
-        button = driver.find_element(By.XPATH, LOGIN_RECOVERY_BUTTON)
-        button.click()
-
-        button = driver.find_element(By.XPATH, RECOVERY__LOGIN_BUTTON)
-        button.click()
+    def test_sause_konst_after_login(self, driver):
+        login(driver)
 
 
-        email = driver.find_element(By.XPATH, LOGIN_EMAIL_INPUT)
-        email.send_keys(LOGIN_EMAIL) 
+        button = driver.find_element(By.XPATH,HOME_SAUSE_BUTTON)
+        ActionChains(driver)\
+            .move_to_element(button)\
+            .click()\
+            .perform()
 
-        pswd = driver.find_element(By.XPATH, SIGNUP_PAROL_INPUT)
-        pswd.send_keys(SIGNUP_PSWD) 
-        
-        button = driver.find_element(By.XPATH,LOGIN_LOGIN_BUTTON)
-        button.click()
 
         sleep(1)
 
-        button = driver.find_element(By.XPATH,HOME_ORDER_BUTTON)
-
-        current_url = driver.current_url
-        assert current_url == 'https://stellarburgers.education-services.ru/'
-        
-
+        h = driver.find_element(By.XPATH,HOME_SAUSE_HDR)
+        assert h.is_displayed()
         driver.quit()
+
+    def test_fill_konst_after_login(self, driver):
+        login(driver)
+
+
+        button = driver.find_element(By.XPATH,HOME_FILL_BUTTON)
+        ActionChains(driver)\
+            .move_to_element(button)\
+            .click()\
+            .perform()
+
+
+        sleep(1)
+
+        h = driver.find_element(By.XPATH,HOME_FILL_HDR)
+        assert h.is_displayed()
+        driver.quit()       
+    
