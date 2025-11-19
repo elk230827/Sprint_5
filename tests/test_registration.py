@@ -2,12 +2,15 @@ from os import error
 from time import sleep
 from selenium.webdriver.common.by import By
 
-from tests.conftest import SIGNUP_EMAIL, SIGNUP_NAME, SIGNUP_PSWD
-from tests.locators import HOME_LOGIN_BUTTON, LOGIN_SIGNUP_LINK, SIGNUP_NAME_INPUT, SIGNUP_PAROL_ERROR, SIGNUP_PAROL_INPUT, SIGNUP_SIGNUP_BUTTON
+from tests.conftest import TEST_URL
+from tests.helper import wait_for
+from tests.testdata import SIGNUP_PSWD
+from tests.locators import HOME_LOGIN_BUTTON, HOME_ORDER_BUTTON, LOGIN_LOGIN_BUTTON, LOGIN_SIGNUP_LINK, SIGNUP_NAME_INPUT, SIGNUP_PAROL_ERROR, SIGNUP_PAROL_INPUT, SIGNUP_SIGNUP_BUTTON
+from tests.testdata import SIGNUP_EMAIL, SIGNUP_NAME
 
 class TestRegistration:
     def test_signup_correct_data(self, driver):
-        driver.get('https://stellarburgers.education-services.ru/') 
+        driver.get(TEST_URL) 
         
         button = driver.find_element(By.XPATH, HOME_LOGIN_BUTTON)
         button.click()
@@ -26,16 +29,15 @@ class TestRegistration:
         
         button = driver.find_element(By.XPATH, SIGNUP_SIGNUP_BUTTON)
         button.click()
-
-        sleep(1)
+        
+        wait_for(driver, LOGIN_LOGIN_BUTTON)
 
         current_url = driver.current_url
-        assert current_url == 'https://stellarburgers.education-services.ru/login'
+        assert current_url == f'{TEST_URL}/login'
 
-        driver.quit()
 
     def test_signup_wrong_pswd(self, driver):
-        driver.get('https://stellarburgers.education-services.ru/') 
+        driver.get(TEST_URL) 
         
         button = driver.find_element(By.XPATH, HOME_LOGIN_BUTTON)
         button.click()
@@ -55,7 +57,6 @@ class TestRegistration:
         button = driver.find_element(By.XPATH, SIGNUP_SIGNUP_BUTTON)
         button.click()
 
-        sleep(1)
 
         error = driver.find_element(By.XPATH, SIGNUP_PAROL_ERROR)
         error.text
@@ -63,9 +64,9 @@ class TestRegistration:
 
 
         current_url = driver.current_url
-        assert current_url == 'https://stellarburgers.education-services.ru/register'
+        assert current_url == f'{TEST_URL}/register'
 
-        driver.quit()
+        
 
 
         
