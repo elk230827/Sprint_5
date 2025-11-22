@@ -1,5 +1,5 @@
 from time import sleep
-from tests.conftest import TEST_URL
+from tests.config import TEST_URL
 from tests.testdata import SIGNUP_PSWD
 from tests.locators import HEADER_KONSTR_LINK, HOME_LOGIN_BUTTON, HOME_ORDER_BUTTON, LOGIN_EMAIL_INPUT, LOGIN_LOGIN_BUTTON, SIGNUP_PAROL_INPUT
 from selenium.webdriver.common.by import By

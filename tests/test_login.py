@@ -2,7 +2,7 @@ from os import error
 from time import sleep
 from selenium.webdriver.common.by import By
 
-from tests.conftest import TEST_URL
+from tests.config import TEST_URL
 from tests.testdata import SIGNUP_PSWD
 from tests.locators import HEADER_LK_LINK, HOME_LOGIN_BUTTON, HOME_ORDER_BUTTON, LOGIN_EMAIL_INPUT, LOGIN_LOGIN_BUTTON, LOGIN_RECOVERY_BUTTON, LOGIN_SIGNUP_LINK, RECOVERY__LOGIN_BUTTON, SIGNUP_LOGIN_BUTTON, SIGNUP_NAME_INPUT, SIGNUP_PAROL_ERROR, SIGNUP_PAROL_INPUT, SIGNUP_SIGNUP_BUTTON
 from tests.testdata import LOGIN_EMAIL, SIGNUP_EMAIL, SIGNUP_NAME

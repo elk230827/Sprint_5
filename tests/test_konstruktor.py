@@ -18,6 +18,9 @@ class TestKonstr:
     def test_bun_konst_after_login(self, driver):
         login(driver)
 
+        # переключимся на Начинки, чтобы проверить булки 
+        button = driver.find_element(By.XPATH, HOME_FILL_BUTTON)
+        button.click()
 
         button = driver.find_element(By.XPATH, HOME_BUN_BUTTON)
         ActionChains(driver)\
